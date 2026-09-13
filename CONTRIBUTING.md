@@ -40,6 +40,11 @@ CI runs exactly these. Two notes:
   uniformly `dart format`-clean and making it so in a feature PR buries the
   actual change.
 
+`main` takes no direct pushes: every change goes through a pull request and CI
+has to be green before it can merge. Nobody is exempt, including the
+maintainer, so if you are used to pushing to `main` on your own repositories,
+branch first. See [`docs/branch-protection.md`](docs/branch-protection.md).
+
 ## What a good change looks like
 
 **Explain why, not what.** The code says what it does. Comments here exist to
