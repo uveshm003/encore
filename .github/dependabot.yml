@@ -1,0 +1,27 @@
+# Dependency updates.
+#
+# Monthly rather than weekly: every bump has to be read against
+# docs/licences.md, since adding or changing a dependency can change the
+# licence position of the whole app, and a native one can raise the minimum OS
+# version for everybody. CI runs tool/licence_audit.py --check on every PR, so
+# a copyleft dependency arriving by bot fails loudly rather than landing.
+version: 2
+updates:
+  - package-ecosystem: pub
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    labels: [dependencies]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    labels: [dependencies]
+
+  - package-ecosystem: gradle
+    directory: /android
+    schedule:
+      interval: monthly
+    labels: [dependencies]

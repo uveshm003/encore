@@ -1,0 +1,12 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/OWNER/encore/security/advisories/new
+    about: >
+      Report privately rather than opening an issue. See SECURITY.md for what
+      is in scope.
+  - name: Which formats can Encore open?
+    url: https://github.com/OWNER/encore/blob/main/docs/requirements-status.md
+    about: >
+      It depends on the device and on whether FFmpeg is installed. Settings →
+      This device lists exactly what yours can read and write.

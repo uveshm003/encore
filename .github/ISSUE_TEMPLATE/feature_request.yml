@@ -1,0 +1,49 @@
+name: Feature request
+description: Suggest something Encore should do.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Encore has a written scope. Before filing, it is worth a look at
+        [`requirement.md`](../../requirement.md) — particularly **§2.2
+        Non-goals**, which rules some things out on purpose — and at
+        [`docs/requirements-status.md`](../../docs/requirements-status.md),
+        which may show the thing you want as already planned or partly done.
+
+        Two things are settled and not open to proposals: Encore does not touch
+        the network on any core path, and it does not upload audio anywhere.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: >
+        The problem rather than the solution. What were you doing when you
+        wanted this, and what did you do instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What should Encore do?
+    validations:
+      required: true
+
+  - type: input
+    id: requirement
+    attributes:
+      label: Related requirement ID
+      description: If it maps to one in requirement.md.
+      placeholder: "PLAY-05"
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This works offline, with no network call on any path.
+          required: true
+        - label: I have read §2.2 Non-goals and this is not one of them.
+          required: true

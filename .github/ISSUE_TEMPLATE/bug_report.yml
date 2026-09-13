@@ -1,0 +1,91 @@
+name: Bug report
+description: Something behaves wrongly, crashes, or produces bad audio.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Two things make a bug here actionable: **what the file was** and **what
+        the app was doing at the time**.
+
+        Please do not attach audio you do not have the right to share — its
+        format, rate and length are almost always enough.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Import …
+        2. Separate at … quality
+        3. Press record
+        4. …
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where it happened
+      options:
+        - Import
+        - Separation
+        - Playback
+        - Recording
+        - Editing
+        - Mixing or export
+        - Projects and library
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: source-audio
+    attributes:
+      label: The audio involved
+      description: >
+        Format, sample rate, channels and length. Not the file itself.
+      placeholder: "MP3, 44.1 kHz, stereo, 3:52"
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options: [macOS, Android, iOS, Other]
+    validations:
+      required: true
+
+  - type: input
+    id: versions
+    attributes:
+      label: Encore and OS version
+      description: >
+        The Encore version is at the bottom of Settings.
+      placeholder: "Encore 0.1.0, macOS 15.2"
+    validations:
+      required: true
+
+  - type: input
+    id: ffmpeg
+    attributes:
+      label: Is FFmpeg installed?
+      description: >
+        It changes which formats can be opened and whether MP3 export exists,
+        so it matters for anything import- or export-shaped. Settings → This
+        device lists what is available.
+      placeholder: "yes / no / not sure"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error text or stack trace
+      description: Pasted as text rather than a screenshot, if you have it.
+      render: text

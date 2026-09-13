@@ -1,0 +1,11 @@
+# Test tags.
+#
+# `golden` marks tests that render images and compare them against the files in
+# test/goldens/. They are a development aid — a way to look at the interface
+# while working on it — not a regression gate, and text rendering differs
+# enough between machines and Flutter versions that running them anywhere but
+# where the images were made produces failures that say nothing about the
+# design. CI excludes them; regenerate locally with --update-goldens.
+tags:
+  golden:
+    description: Renders and compares images; local-only.

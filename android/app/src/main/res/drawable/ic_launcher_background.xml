@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The ember gradient the mark is drawn on, matching EncoreMarkPainter. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="315"
+        android:startColor="@color/ember_bright"
+        android:centerColor="@color/ember"
+        android:endColor="@color/ember_deep"
+        android:type="linear"/>
+</shape>

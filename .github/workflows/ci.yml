@@ -1,0 +1,133 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # So a dependency bump can be checked without waiting for a push.
+  workflow_dispatch:
+
+concurrency:
+  # A new push to the same branch supersedes the run in flight.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Pinned rather than `stable`: an unannounced Flutter release should not be
+  # able to turn a green branch red on its own.
+  FLUTTER_VERSION: "3.44.9"
+
+jobs:
+  analyse-and-test:
+    name: Analyse and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyse
+        # Warnings included: the tree is clean and should stay that way.
+        run: flutter analyze
+
+      - name: Test
+        # `golden` is excluded on purpose. Those tests render the interface to
+        # test/goldens/ so it can be looked at while being worked on; text
+        # rendering differs between machines and Flutter versions, so comparing
+        # the images anywhere but where they were made produces failures that
+        # say nothing about the design. See dart_test.yaml.
+        run: flutter test --exclude-tags golden --reporter expanded
+
+      - name: Check dependency licences
+        # Fails on anything copyleft reaching a shipping platform, anything
+        # with no licence file, and anything it cannot identify. Adding a
+        # dependency changes the licence position of the whole app, so this
+        # runs on every change rather than by hand. See docs/licences.md.
+        run: python3 tool/licence_audit.py --check
+
+  build:
+    name: Build ${{ matrix.target }}
+    # Only worth the minutes once the cheap checks have passed.
+    needs: analyse-and-test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: macOS
+            os: macos-latest
+            command: flutter build macos --debug
+          - target: Android
+            os: ubuntu-latest
+            command: flutter build apk --debug
+          - target: iOS
+            os: macos-latest
+            # No signing identity on a runner, and none needed to prove it
+            # compiles.
+            command: flutter build ios --simulator --no-codesign
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        if: matrix.target == 'Android'
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+      - run: ${{ matrix.command }}
+
+  offline-guarantee:
+    name: Release build requests no INTERNET permission
+    needs: analyse-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Assert the APK cannot reach the network
+        # NFR-OFF-01 is the app's central promise, and it is enforced by the
+        # platform rather than by convention: without android.permission.INTERNET
+        # the process cannot open a socket whatever the code says. A dependency
+        # that quietly adds the permission through manifest merging would
+        # dissolve that guarantee with no visible change, so it is asserted
+        # here rather than trusted.
+        run: |
+          set -euo pipefail
+          AAPT="$(find "$ANDROID_HOME/build-tools" -name aapt2 | sort -V | tail -1)"
+          echo "using $AAPT"
+          PERMISSIONS="$("$AAPT" dump permissions build/app/outputs/flutter-apk/app-release.apk)"
+          echo "$PERMISSIONS"
+          if grep -q "android.permission.INTERNET" <<<"$PERMISSIONS"; then
+            echo "::error::The release APK requests INTERNET. Encore is offline by construction (NFR-OFF-01); find the dependency that added it."
+            exit 1
+          fi
+          echo "No INTERNET permission. Offline guarantee intact."

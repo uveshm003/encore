@@ -1,0 +1,64 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Gradle and Xcode build output.
+#
+# The stock Flutter .gitignore only covers /build/ at the root, which leaves
+# android/build/ — where Gradle writes its reports — to be committed. These
+# patterns match a build or .gradle directory at any depth, including inside
+# packages/.
+**/build/
+**/.gradle/
+**/.cxx/
+android/local.properties
+**/xcuserdata/
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+android/key.properties
+
+# Release signing material. The keystore itself must never be committed;
+# android/app/build.gradle.kts falls back to the debug keys when it is absent,
+# so a fresh checkout still builds --release without one.
+*.jks
+*.keystore

@@ -1,0 +1,15 @@
+# Copy to android/key.properties on the release machine and fill in.
+# That file is gitignored: it holds the passwords to your signing key, and a
+# leaked upload key cannot be rotated without Google's help.
+#
+# Generate a keystore with:
+#   keytool -genkey -v -keystore ~/encore-upload.jks \
+#     -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+#
+# storeFile is resolved relative to the android/ directory, so an absolute
+# path outside the repository is the safest choice.
+
+storeFile=/absolute/path/to/encore-upload.jks
+storePassword=
+keyAlias=upload
+keyPassword=

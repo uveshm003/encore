@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The window behind the app while the Flutter engine starts. It matches the
+     Dart splash so the hand-off is invisible. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/encore_base"/>
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/splash_mark"/>
+    </item>
+</layer-list>

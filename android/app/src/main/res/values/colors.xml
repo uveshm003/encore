@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Kept in step with lib/ui/design/palette.dart. -->
+<resources>
+    <color name="ember_bright">#FFA97F</color>
+    <color name="ember">#EE8659</color>
+    <color name="ember_deep">#A84A2A</color>
+    <color name="encore_base">#0A0B0E</color>
+    <color name="encore_surface">#101217</color>
+</resources>
