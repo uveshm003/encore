@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_pcm_sound: ^3.3.3
   record: ^7.1.1
-  file_picker: ^12.2.0
+  file_picker: ^13.1.0
   path_provider: ^2.1.6
   uuid: ^4.6.0
   collection: ^1.19.1
