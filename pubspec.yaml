@@ -42,7 +42,7 @@ dependencies:
   collection: ^1.19.1
   encore_media:
     path: packages/encore_media
-  flutter_onnxruntime: ^1.8.5
+  flutter_onnxruntime: ^1.9.0
 
 dev_dependencies:
   flutter_test:
