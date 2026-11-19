@@ -64,5 +64,5 @@ end to end, on macOS and Android. All ten P0 acceptance criteria in
 [`docs/requirements-status.md`](docs/requirements-status.md) for what is not
 done and why.
 
-[Unreleased]: https://github.com/OWNER/encore/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/OWNER/encore/releases/tag/v0.1.0
+[Unreleased]: https://github.com/uveshm003/encore/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/uveshm003/encore/releases/tag/v0.1.0

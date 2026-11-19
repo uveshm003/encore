@@ -1,6 +1,6 @@
 # Encore
 
-[![CI](https://github.com/OWNER/encore/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/encore/actions/workflows/ci.yml)
+[![CI](https://github.com/uveshm003/encore/actions/workflows/ci.yml/badge.svg)](https://github.com/uveshm003/encore/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Android%20%7C%20iOS-lightgrey.svg)](#running-it)
 
@@ -194,24 +194,14 @@ The requirement left five questions open (§9.4). Answered here as:
    user has to supply. *Platform floor* in the status doc says what dropping
    the runtime would get back, and how little it would take.
 
-## Before you publish it
+## Releasing
 
-Five things in the checkout are deliberately placeholders. The first three take
-a minute and should be done before the first push:
-
-- **Your name in the licence.** `LICENSE` says `<YOUR NAME>`. This is the one
-  that matters legally — until it names a copyright holder the MIT grant has no
-  one granting it.
-- **A contact address for the Code of Conduct.** `CODE_OF_CONDUCT.md` says
-  `<CONTACT EMAIL>`. A reporting path nobody can reach is worse than none.
-- **`OWNER` in the repository links.** The CI badge and Contributing link at the
-  top of this file, the compare links at the foot of `CHANGELOG.md`, and the
-  two links in `.github/ISSUE_TEMPLATE/config.yml` all point at
-  `github.com/OWNER/encore`. A find-and-replace on `OWNER` covers every one.
-- **Bundle identifiers.** All three platforms use `studio.encore.app`
-  (`android/app/build.gradle.kts`, `macos/Runner/Configs/AppInfo.xcconfig`,
+- **Bundle identifiers.** All three platforms use the placeholder
+  `studio.encore.app` (`android/app/build.gradle.kts`,
+  `macos/Runner/Configs/AppInfo.xcconfig`,
   `ios/Runner.xcodeproj/project.pbxproj`). Replace it with a reverse-DNS name
-  you own — it is one string, in three places, and nothing else refers to it.
+  you own before a store release — it is one string, in three places, and
+  nothing else refers to it.
 - **Release signing.** Android reads a keystore from `android/key.properties`
   (`storeFile`, `storePassword`, `keyAlias`, `keyPassword`) when that file
   exists and falls back to the debug keys when it does not, so a fresh

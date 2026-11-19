@@ -47,7 +47,7 @@ taking seriously:
   inspected. They are not encrypted and are not meant to be.
 - **The absence of code signing on a build you made yourself.** The repository
   ships placeholder bundle identifiers and falls back to debug signing; see
-  *Before you publish it* in the README.
+  *Releasing* in the README.
 - **Denial of service from a very large file.** Running out of memory on a
   two-hour recording is a resource limit, and there is a known one — see below.
 
